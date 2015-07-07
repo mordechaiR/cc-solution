@@ -44,7 +44,7 @@ extracted.
 
 The sort function has asymptotic time complexity O(k(log k)), where k is the number of
 input lines (tweets). The program uses the insert() and find() methods on the hash maps,
-which have time complexity O(n), where n is the number of unique words from the input.
+with worst case time complexity O(n), where n is the number of unique words from the input.
 Although there are more sophisticated algorithms for finding the median, without having
 to use sort (such as the C++ nth_element function), I find the implementation scales
 very quickly as written. It processes all the words and medians from the complete works 
