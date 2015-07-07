@@ -1,11 +1,16 @@
 Mordechai Rorvig
+
 mrorvig@gmail.com
+
 512-909-7409
 
 Insight Data Engineering - Coding Challenge Submission
+
 July 7, 2015
 
+
 Background information: 
+
 
 This README file describes my GitHub repository developed for the Coding Challenge.
 I have coded my solution in C++, in one source file, main.cpp, to be found in the
@@ -18,14 +23,18 @@ Apple LLVM version 6.1.0 (clang-602.0.53) (based on LLVM 3.6.0svn)
 Target: x86_64-apple-darwin14.3.0
 Thread model: posix
 
+
 Running the code:
+
 
 The code should be executable on entering "bash run.sh" on a Mac command line, or 
 by using the appropriate bash script execution commands on other systems. The 
 path to the inputfile is specified in the bash.sh script, under the variable
 INPUTPATH. This is fed into the C++ program as a command line argument. 
 
+
 Program description:
+
 
 My implementation uses hash tables (with C++ type of unordered_map) to store the
 counts of each word, as well as the unique words per line. The median words
@@ -44,6 +53,7 @@ machine.
 
 Lastly, I note that my implementation ignores null tweets (blank lines) and does 
 not take them into account for calculating the median values. 
+
 
 END  
 
