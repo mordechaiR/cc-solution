@@ -40,8 +40,8 @@ a list of tweets, as well as the running median unique number of words per tweet
 Here, word denotes any text delimited by spaces or whitespace.
 
 My primary goals for my implementation were correctness, speed/scalability, and readability. 
-I tried to keep my solution concise to aid the latter goal, and my code is all 
-contained with a single source file.
+I tried to keep my solution concise to achieve the latter goal, and my code is all 
+contained within a single source file.
 
 The two separate objectives of the challenge are distinct and motivated the choice 
 of two different primary algorithms for achieving the solution. Common to both algorithms 
@@ -61,7 +61,7 @@ and easy to read and understand.
 One of the requirements of the challenge is to output the word frequencies in ASCII 
 order. I accomplish this by converting the word frequency hash table into a 
 "vector<pair<string,int> >" data type. This is then efficiently sorted in ASCII order
-using the C++ "sort()" function and made ready for output. 
+using the C++ "sort()" function before printing to output. 
 
 For finding the running median of unique words per line, I use a histogram based 
 algorithm. Each resultant median is stored in a "vector<double>" data type for eventual 
@@ -81,11 +81,12 @@ H{20}=1, and H{i}=0 for all other i. Then, to find the median value, we are able
 through the bins, keeping track of the total number of counts in each bin, until at least 
 half the total number of counts for the entire histogram is reached. At that point, we 
 have effectively chosen the central element of the array of unique words per line, 
-without having to have sorted it. 
+without having to have sorted it. (Some minor complications in the algorithm are implemented 
+to account for even/odd count sizes.)
 
 The histogram based algorithm is essentially constant time complexity, with a number of 
-operations proportional to the maximum number of unique words found in the document. I 
-assume there are no more than 100 unique words per line. Thus, the median finding algorithm 
+operations proportional to the maximum number of unique words (per line) in the document. I 
+assume there are no more than 100 unique words per line. Thus, the median-finding algorithm 
 is O(N) asymptotic time complexity. 
 
 Lastly, I note that my implementation ignores null tweets (blank lines) and does 
