@@ -6,17 +6,16 @@ mrorvig@gmail.com
 
 Insight Data Engineering - Coding Challenge Submission
 
-July 7, 2015
+July 9, 2015
 
 
 Background information: 
 
 
 This README file describes my GitHub repository developed for the Coding Challenge.
-I have coded my solution in C++, in one source file, main.cpp, to be found in the
-src directory. My solution was developed on a 2013 MacBook Pro on OS X Yosemite. 
-It is set to compile using g++ in my bash script called bash.sh, located in the 
-root directory. My g++ version, given by g++ -v, is:
+I have coded my solution in C++, in one source file, /src/main.cpp. My solution was 
+developed on a 2013 MacBook Pro on OS X Yosemite. It is set to compile using g++ 
+in my bash script /bash.sh. My g++ version, given by g++ -v, is:
 
 Configured with: --prefix=/Applications/Xcode.app/Contents/Developer/usr --with-gxx-include-dir=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/c++/4.2.1
 Apple LLVM version 6.1.0 (clang-602.0.53) (based on LLVM 3.6.0svn)
@@ -36,23 +35,80 @@ INPUTPATH. This is fed into the C++ program as a command line argument.
 Program description:
 
 
-My implementation uses hash tables (with C++ type of unordered_map) to store the
-counts of each word, as well as the unique words per line. The median words
-per line are found by storing the median words per line in a vector, and then 
-sorting that vector on each iteration so that the median may be straightforwardly
-extracted. 
+The objective of the challenge is to determine the frequency of words appearing in 
+a list of tweets, as well as the running median unique number of words per tweet. 
+Here, word denotes any text delimited by spaces or whitespace.
 
-The sort function has asymptotic time complexity O(k(log k)), where k is the number of
-input lines (tweets). The program uses the insert() and find() methods on the hash maps,
-with worst case time complexity O(n), where n is the number of unique words from the input.
-Although there are more sophisticated algorithms for finding the median, without having
-to use sort (such as the C++ nth_element function), I find the implementation scales
-very quickly as written. It processes all the words and medians from the complete works 
-of Shakespeare (shakes.txt, located in the /tweet_input directory) in 16 seconds on my 
-machine. 
+My primary goals for my implementation were correctness, speed/scalability, and readability. 
+I tried to keep my solution concise to aid the latter goal, and my code is all 
+contained with a single source file.
+
+The two separate objectives of the challenge are distinct and motivated the choice 
+of two different primary algorithms for achieving the solution. Common to both algorithms 
+is the necessity of parsing the document line by line and word by word. This leads to a 
+lower limit of time complexity for any solution of O(N), where N is the number of words
+in the document. 
+
+For finding the frequency of words, a C++ hash table type "unordered_map<string,int>" is used. 
+The word acts as the key for the map, and the frequency acts as the associated integer value. As 
+each word is processed, it is either inserted into the map (if not found) or its associated 
+map frequency is incremented by one. The insertion and find methods are constant time 
+complexity, or worst case O(N), where N is the number of entries in the map. Thus, the 
+time complexity of the overall word frequency algorithm is worst-case O(N^2), and best case 
+O(N). This solution is relatively fast, scalable, and also exceptionally concise
+and easy to read and understand. 
+
+One of the requirements of the challenge is to output the word frequencies in ASCII 
+order. I accomplish this by converting the word frequency hash table into a 
+"vector<pair<string,int> >" data type. This is then efficiently sorted in ASCII order
+using the C++ "sort()" function and made ready for output. 
+
+For finding the running median of unique words per line, I use a histogram based 
+algorithm. Each resultant median is stored in a "vector<double>" data type for eventual 
+output. The histogram based algorithm works in the following manner. First, as the word 
+frequencies are counted, the unique number of words per line is also stored. If we 
+had a vector or array of the unique number of words per line, all we would have to do 
+to find the median would be to sort that array, then choose the element with the middle 
+index. (In the case of an even array size, we would take the average of the two centrally 
+indexed elements). Sorting the array on each line would be O(K log K) complexity, where K
+denotes the number of lines (tweets) considered. (K is related to N as K=N/x, where x 
+is the average number of words per line.)
+
+Instead of sorting the array, however, we may simply insert each element into a histogram, 
+where the key of each bin is the unique words per line. For example, if we had an array of 
+{20, 10} unique words in two lines, we could store them in a histogram H where H{10}=1, 
+H{20}=1, and H{i}=0 for all other i. Then, to find the median value, we are able to iterate
+through the bins, keeping track of the total number of counts in each bin, until at least 
+half the total number of counts for the entire histogram is reached. At that point, we 
+have effectively chosen the central element of the array of unique words per line, 
+without having to have sorted it. 
+
+The histogram based algorithm is essentially constant time complexity, with a number of 
+operations proportional to the maximum number of unique words found in the document. I 
+assume there are no more than 100 unique words per line. Thus, the median finding algorithm 
+is O(N) asymptotic time complexity. 
 
 Lastly, I note that my implementation ignores null tweets (blank lines) and does 
 not take them into account for calculating the median values. 
+
+
+Program flow: 
+
+The call graph of the program is given by:
+
+main()
+     WordsAndMediansProcessor::findWordsAndMedians() 
+          WordsAndMediansProcessor::wordCounter()
+          WordsAndMediansProcessor::medianFromHistogram()
+     WordsAndMediansProcessor::doWordOutput()
+     WordsAndMediansProcessor::doMedianOutput()
+
+
+Results:
+
+The program has been tested and found to perform correctly. I find the program to be 
+highly scalable, for example, processing the complete works of Shakespeare 
+(125,000 lines) in 2.6 seconds on my machine. 
 
 
 END  
