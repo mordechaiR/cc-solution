@@ -9,7 +9,7 @@ Insight Data Engineering - Coding Challenge Submission
 July 9, 2015
 
 
-Background information: 
+**Background information:**
 
 
 This README file describes my GitHub repository developed for the Coding Challenge.
@@ -23,7 +23,7 @@ Target: x86_64-apple-darwin14.3.0
 Thread model: posix
 
 
-Running the code:
+**Running the code:**
 
 
 The code should be executable on entering "bash run.sh" on a Mac command line, or 
@@ -32,7 +32,7 @@ path to the inputfile is specified in the bash.sh script, under the variable
 INPUTPATH. This is fed into the C++ program as a command line argument. 
 
 
-Program description:
+**Program description:**
 
 
 The objective of the challenge is to determine the frequency of words appearing in 
@@ -92,24 +92,24 @@ Lastly, I note that my implementation ignores null tweets (blank lines) and does
 not take them into account for calculating the median values. 
 
 
-Program flow: 
+**Program flow:**
 
 The call graph of the program is given by:
 
 main()
-     WordsAndMediansProcessor::findWordsAndMedians() 
-          WordsAndMediansProcessor::wordCounter()
-          WordsAndMediansProcessor::medianFromHistogram()
-     WordsAndMediansProcessor::doWordOutput()
-     WordsAndMediansProcessor::doMedianOutput()
+_____WordsAndMediansProcessor::findWordsAndMedians() 
+__________WordsAndMediansProcessor::wordCounter()
+__________WordsAndMediansProcessor::medianFromHistogram()
+_____WordsAndMediansProcessor::doWordOutput()
+_____WordsAndMediansProcessor::doMedianOutput()
 
 
-Results:
+**Results:**
 
 The program has been tested and found to perform correctly. I find the program to be 
 highly scalable, for example, processing the complete works of Shakespeare 
 (125,000 lines) in 2.6 seconds on my machine. 
 
 
-END  
+**END**
 
