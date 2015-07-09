@@ -96,12 +96,12 @@ not take them into account for calculating the median values.
 
 The call graph of the program is given by:
 
-main()
-_____WordsAndMediansProcessor::findWordsAndMedians() 
-__________WordsAndMediansProcessor::wordCounter()
-__________WordsAndMediansProcessor::medianFromHistogram()
-_____WordsAndMediansProcessor::doWordOutput()
-_____WordsAndMediansProcessor::doMedianOutput()
+_main()
+______WordsAndMediansProcessor::findWordsAndMedians() 
+___________WordsAndMediansProcessor::wordCounter()
+___________WordsAndMediansProcessor::medianFromHistogram()
+______WordsAndMediansProcessor::doWordOutput()
+______WordsAndMediansProcessor::doMedianOutput()
 
 
 **Results:**
