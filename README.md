@@ -92,18 +92,6 @@ Lastly, I note that my implementation ignores null tweets (blank lines) and does
 not take them into account for calculating the median values. 
 
 
-**Program flow:**
-
-The call graph of the program is given by:
-
-_main()
-______WordsAndMediansProcessor::findWordsAndMedians() 
-___________WordsAndMediansProcessor::wordCounter()
-___________WordsAndMediansProcessor::medianFromHistogram()
-______WordsAndMediansProcessor::doWordOutput()
-______WordsAndMediansProcessor::doMedianOutput()
-
-
 **Results:**
 
 The program has been tested and found to perform correctly. I find the program to be 
