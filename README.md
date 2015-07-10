@@ -60,11 +60,11 @@ and easy to read and understand.
 
 One of the requirements of the challenge is to output the word frequencies in ASCII 
 order. I accomplish this by converting the word frequency hash table into a 
-"vector<pair<string,int> >" data type. This is then efficiently sorted in ASCII order
+vector data type. This is then efficiently sorted in ASCII order
 using the C++ "sort()" function before printing to output. 
 
 For finding the running median of unique words per line, I use a histogram based 
-algorithm. Each resultant median is stored in a "vector<double>" data type for eventual 
+algorithm. Each resultant median is stored in a vector data structure for eventual 
 output. The histogram based algorithm works in the following manner. First, as the word 
 frequencies are counted, the unique number of words per line is also stored. If we 
 had a vector or array of the unique number of words per line, all we would have to do 
