@@ -64,7 +64,7 @@ void WordsAndMediansProcessor::medianFromHistogram (int &row, bool &rowIsEven) {
     //iterate through each bin, until reaching at least half of total tweets considered;
     //at that point, the median value will have been reached, since we iterate through
     //a sorted, ascending set.
-    for (int uniqueWords = 1; uniqueWords < MAX_UNIQUE_WORDS_PER_TWEET; uniqueWords++) {
+    for (int uniqueWords = 1; uniqueWords < MAX_UNIQUE_WORDS_PER_TWEET; ++uniqueWords) {
         currCounts = histogram[uniqueWords];
         if (currCounts > 0) {
             sumCounts += currCounts;
@@ -138,13 +138,13 @@ void WordsAndMediansProcessor::findWordsAndMedians (string &inputFile) {
 void WordsAndMediansProcessor::doWordOutput (string &wordOutputFile) {
     //first, sort the wordCount data by making conversion to a vector type.
     vector<pair<string,int> > orderedWordCounts;
-    for (auto iter = wordCounts.begin(); iter != wordCounts.end(); iter++) {
+    for (auto iter = wordCounts.begin(); iter != wordCounts.end(); ++iter) {
         orderedWordCounts.push_back(pair<string, int> (iter->first, iter->second));
     }
     sort(orderedWordCounts.begin(), orderedWordCounts.end());
     //next, print the sorted output.
     ofstream wordOutput ( wordOutputFile );
-    for (auto iter = orderedWordCounts.begin(); iter != orderedWordCounts.end(); iter++) {
+    for (auto iter = orderedWordCounts.begin(); iter != orderedWordCounts.end(); ++iter) {
         wordOutput << setw(27) << left << iter->first << " " << iter->second << endl;
     }
     wordOutput.close();
@@ -153,7 +153,7 @@ void WordsAndMediansProcessor::doWordOutput (string &wordOutputFile) {
 void WordsAndMediansProcessor::doMedianOutput (string &medianOutputFile) {
     ofstream medianOutput ( medianOutputFile );
     medianOutput << fixed << setprecision(2);
-    for (auto iter = medianVals.begin(); iter != medianVals.end(); iter++) {
+    for (auto iter = medianVals.begin(); iter != medianVals.end(); ++iter) {
         medianOutput << *iter << endl;
     }
     medianOutput.close();
